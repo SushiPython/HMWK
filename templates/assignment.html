@@ -1,0 +1,73 @@
+<head>
+  <title>HMWK - Add Assignment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div class="box">
+  <h1>Add Assignment</h1>
+  <div class="assignment">
+    <label>Assignment</label><br><input type="text" id="assignment_name" placeholder="Assignment"><br>
+    <label>Class</label><br><input type="text" id="subject" placeholder="Class"><br>
+    <label>Work On</label><br><input type="date" id="work_on"><br>
+    <label>Due</label><br><input type="date" id="due"><br><br>
+    <input type="submit" value="Add" id="createAssignment">
+  </div><br><br>
+  <button onclick="window.location.href='/'">Homepage</button>
+  </div>
+</body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+  * {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    margin: .3em;
+  }
+  .assignment {
+    border: 3px solid #ffffff;
+    width: 80%;
+    max-width: 770px;
+    padding: 1em;
+    margin: auto;
+  }
+  input {
+    height: 3em;
+  }
+  .box {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  button, input {
+    border-radius: 3px;
+  }
+  button, input[type=submit] {
+    cursor: pointer;
+  }
+</style>
+<script>
+  const assignment_name = document.getElementById('assignment_name');
+  const subject = document.getElementById('subject');
+  const due = document.getElementById('due');
+  const work_on = document.getElementById('work_on');
+  document.getElementById('createAssignment').addEventListener('click', function() {
+    let request = new XMLHttpRequest();
+    request.open("POST", '/create-assignment', true);
+    request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    request.send(JSON.stringify({
+      'assignment_name': assignment_name.value,
+      'subject': subject.value,
+      'due': due.value,
+      'work_on': work_on.value
+    }));
+    assignment_name.value = '';
+    subject.value = '';
+    due.value = '';
+    work_on.value = '';
+    alert('Added!')
+  })
+</script>

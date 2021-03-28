@@ -1,0 +1,51 @@
+<head>
+  <title>HMWK - Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div class="box">
+  <h1>Register</h1>
+  <div class="assignment">
+    <form method="POST" action="/create-account">
+    <label>Username</label><br><input type="text" name="username"><br>
+    <label>Password</label><br><input type="password" name="password"><br><br>
+    <input type="submit" value="Register" id="register">
+    </form>
+  </div><br><br>
+  <button onclick="window.location.href='/'">Homepage</button>
+  </div>
+</body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+  * {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    margin: .3em;
+  }
+  .assignment {
+    border: 3px solid #ffffff;
+    width: 80%;
+    max-width: 770px;
+    padding: 1em;
+    margin: auto;
+  }
+  input {
+    height: 3em;
+  }
+  .box {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  button, input {
+    border-radius: 3px;
+  }
+  button, input[type=submit] {
+    cursor: pointer;
+  }
+</style>

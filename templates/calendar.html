@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <title>HMWK - Calendar View</title>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.js'></script>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css' rel='stylesheet' />
+    <link href='https://cdn.sushipython.us/content/code/css/bootstrap.css' rel="stylesheet">
+    <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          timeZone: new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1],
+          themeSystem: 'bootstrap',
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+          },
+          events: [
+            {% for a in assignments %}
+              {
+                id: `{{a['id']}}`,
+                title: `{{a['assignment_name']}} for {{a['subject']}}`,
+                start: `{{a['due']}}`
+              },
+            {% endfor %}
+          ],
+          height: screen.height-200
+        });
+        calendar.render();
+      });
+
+    </script>
+  </head>
+  <body>
+    <div id='calendar'></div>
+    <button class="hmpg" onclick="window.location.href='/'">Homepage</button>
+  </body>
+</html>
+<style>
+  .hmpg {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    width: 10%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: .5em;
+  }
+  #calendar {
+    width: 100%;
+    height: auto;
+  }
+  button, input[type=submit] {
+    cursor: pointer;
+  }
+</style>

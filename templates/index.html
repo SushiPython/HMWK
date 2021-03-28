@@ -1,0 +1,41 @@
+<head>
+  <title>HMWK - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="box">
+    <h1>HMWK Home</h1>
+    {% if session_id %}
+      <h2>Logged in as {{username}}</h2>
+    {% endif %}
+    <button onclick="window.location.href='/assignment'">Create Assignment</button>
+    <button onclick="window.location.href='/tasks?sort=due'">List View</button>
+    <button onclick="window.location.href='/calendar'">Calendar View</button>
+    <button onclick="window.location.href='/register'">Register</button>
+    <button onclick="window.location.href='/login'">Log In</button>
+  </div>
+</body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+  * {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    
+  }
+  button {
+    height: 2.5em;
+    border-radius: 3px;
+  }
+  .box {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  button, input[type=submit] {
+    cursor: pointer;
+  }
+</style>

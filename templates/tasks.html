@@ -1,0 +1,59 @@
+<head>
+  <title>HMWK - List View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1>Assignments</h1>
+<button onclick="window.location.href='/'">Homepage</button>
+<button onclick="window.location.href='/tasks?sort=work'">Sort Work</button>
+<button onclick="window.location.href='/tasks?sort=due'">Sort Due</button>
+<h2>Sorting by {{sort}}</h2>
+{% for a in assignments %}
+  <div class="assignment">
+    <span><b>Name</b> {{a['assignment_name']}}</span><br>
+    <span><b>Class</b> {{a['subject']}}</span><br>
+    <span><b>Due</b> {{str(a['due'])[:-9]}}</span><br>
+    <span><b>Work On</b> {{str(a['work_on'])[:-9]}}</span><br><br>
+    <button id="{{a['id']}}">Delete</button>
+  </div><br><br>
+{% endfor %}
+</body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+  * {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+  }
+  .assignment {
+    border: 3px solid #ffffff;
+    width: 30%;
+    padding: 1em;
+    margin: auto;
+  }
+  button {
+    height: 2.5em;
+  }
+  button, .assignment {
+    border-radius: 3px;
+  }
+  button, input[type=submit] {
+    cursor: pointer;
+  }
+</style>
+<script>
+  let delButton
+  {% for a in assignments %}
+    delButton = document.getElementById('{{a["id"]}}')
+    delButton.addEventListener('click', function (e) {
+      let request = new XMLHttpRequest();
+      request.open("POST", '/delete-assignment', false);
+      request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+      request.send(JSON.stringify({
+        'id': e.target.id
+      }));
+      window.location.reload()
+    })
+  {% endfor %}
+</script>
